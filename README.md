@@ -1,5 +1,6 @@
 Устанавливка:
 git clone GitHub - tech4242/docker-hadoop-hive-parquet: Hadoop, Hive, Parquet and Hue in docker-compose v3 (в заранее созданной папке)
+
 cmd → docker-compose up
 
 Отлично, как только образ собран, а контейнер поднят — заходим по http://localhost:8888/hue и попадаем в HUE. Придумываем произвольную пару логина-пароля для будущей авторизации и приступаем к работе. 
@@ -9,22 +10,28 @@ cmd → docker-compose up
 2. Далее подключаемся к контейнеру «datanode-1», создаем внутри папку и переносим в нее скачанные файлы.
 
    docker ps
+   
    Смотрим CONTAINER ID (7a2f6a78e991)
+   
    Проваливаемся в контейнер: docker exec -it 7a2f6a78e991 bash
+   
    Создаем папку: mkdir War_and_piece
+   
    Команда, чтобы проверить содержимое: ls
    
-3. Файлы предварительно «схлопываем» в один.
-   Заходим в созданную папку: cd War_and_piece
-   Объединяем в один файл: cat voyna-i-mir-tom-1.txt voyna-i-mir-tom-2.txt voyna-i-mir-tom-3.txt
-   voyna-i-mir-tom-4.txt>war_and_piece.txt
+4. Файлы предварительно «схлопываем» в один.
 
-4. Загружаем полученный файл на hdfs в вашу личную папку.
+   Заходим в созданную папку: cd War_and_piece
+   
+   Объединяем в один файл: cat voyna-i-mir-tom-1.txt voyna-i-mir-tom-2.txt voyna-i-mir-tom-3.txt voyna-i-mir-tom-4.txt>war_and_piece.txt
+
+6. Загружаем полученный файл на hdfs в вашу личную папку.
+
    hdfs dfs -copyFromLocal war_and_piece.txt /user/javascript_rocker
    
 Если все пройдет удачно, то по возвращению в hue вас ждет сюрприз: вы увидите полное произведение «Война и мир» на hdfs (не забудьте обновить страницу). На самом деле интерфейс HUE поддерживает возможность переноса небольших(!) файлов с помощью drag&drop — но для нас это слишком просто.
 
-//image
+![$screenshot](https://github.com/javascriptrocker2104/work_with_hadoop/blob/main/hadoop.png)
 
 5. Возвращаемся в терминал и продолжаем изучать hdfs — попробуйте выполнить команду, которая
    выводит содержимое  вашей личной папки. 
