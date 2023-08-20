@@ -66,11 +66,17 @@ cmd → docker-compose up
 
 10. Повторите команду, которая выводит информацию о том, какое место на диске
 занимает файл и убедитесь, что изменения произошли.
+
     hdfs dfs -ls -h /user/javascript_rocker/war_and_piece.txt
 
     (OUTPUT: -rwxr-xr-x   2 root javascript_rocker      2.9 M 2023-08-20 10:15 /user/javascript_rocker/war_and_piece.txt)
  
 11. И финальное — напишите команду, которая подсчитывает количество строк в произведении «Война и мир».
+    
     hdfs dfs -cat /user/javascript_rocker/war_and_piece.txt | wc -l
  
     (OUTPUT:10272)
+
+
+    Командная строка:
+    ![$screenshot](https://github.com/javascriptrocker2104/work_with_hadoop/blob/main/cmd.png)
